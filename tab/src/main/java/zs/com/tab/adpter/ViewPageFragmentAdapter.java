@@ -55,11 +55,12 @@ public class ViewPageFragmentAdapter extends FragmentStatePagerAdapter {
             return;
         }
 
-        // 加入tab title
+
         View v = LayoutInflater.from(mContext).inflate(
                 R.layout.base_viewpage_fragment_tab_item, null, false);
         TextView title = (TextView) v.findViewById(R.id.tab_title);
         title.setText(info.title);
+        //给滑动选项卡上设置文字 （文字在自定义的view上）
         mPagerStrip.addTab(v);
 
         mTabs.add(info);
@@ -122,6 +123,8 @@ public class ViewPageFragmentAdapter extends FragmentStatePagerAdapter {
         return PagerAdapter.POSITION_NONE;
     }
 
+
+    //具体滑动tab页面所对应的Fragment页面
     @Override
     public Fragment getItem(int position) {
         ViewPageInfo info = mTabs.get(position);

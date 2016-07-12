@@ -15,6 +15,7 @@
         app:slidingBlock="?attr/sliding_block_bg" >
     </zs.com.tab.widget.PagerSlidingTabStrip>
 
+    <!-- 滑动Tab 下方的一条白色细线-->
     <View
         android:id="@+id/view_pager_line"
         android:layout_width="match_parent"
