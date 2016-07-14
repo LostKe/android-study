@@ -453,6 +453,7 @@ public class PagerSlidingTabStrip extends HorizontalScrollView implements
 					listener.onChanged(position);
 			}
 
+			//这里是横向滑动
 			@Override
 			public void onPageScrolled(int nextPagePosition,
 					float positionOffset, int positionOffsetPixels) {
@@ -473,6 +474,7 @@ public class PagerSlidingTabStrip extends HorizontalScrollView implements
 				}
 			}
 
+			//横向滑动状态改变了
 			@Override
 			public void onPageScrollStateChanged(int arg0) {
 				if (onPageChangeListener != null) {

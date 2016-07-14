@@ -10,7 +10,8 @@ public enum ViewPageDict {
     NEWS("资讯","news",FragmentPageA.class,null),
     BLOG("博客","blog", FragmentPageB.class,null),
     ANS("问答","ans", FragmentPageC.class,null),
-    ACTIVITY("活动","activity",FragmentPageD.class,null);
+    ACTIVITY("活动","activity",FragmentPageD.class,null),
+    CITY("同城","city",FragmentPageE.class,null);
 
     private String title;
     private String tag;
