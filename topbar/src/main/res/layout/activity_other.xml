@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="zs.com.topbar.MainActivity">
+
+    <zs.com.topbar.widget.TopBar
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:custom="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/topbar"
+        android:layout_width="wrap_content"
+        android:layout_height="60dp"
+        custom:leftBackground="@drawable/ic_my_event"
+        custom:leftTextColor="@color/colorPrimary"
+
+        custom:rightBackground="@drawable/ic_my_setup"
+        custom:rightTextColor="@color/colorPrimary"
+
+        custom:topTitle="我是另外的"
+        custom:topTitleTextColor="@color/colorAccent"
+        custom:topTitleTextSize="15sp"
+        >
+        </zs.com.topbar.widget.TopBar>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Hello World!" />
+
+    <Button
+        android:id="@+id/bt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+</LinearLayout>

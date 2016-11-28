@@ -11,11 +11,12 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TabHost;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class MainActivity extends AppCompatActivity implements View.OnTouchListener {
+public class MainActivity extends AppCompatActivity implements View.OnTouchListener ,TabHost.OnTabChangeListener{
 
     @BindView(R.id.tabHost)
     FragmentTabHost mTabHost;
@@ -45,17 +46,12 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
             TextView title= (TextView) indicator.findViewById(R.id.tab_title);
             Drawable drawable = this.getResources().getDrawable(mainTab.getResIcon());
             icon.setImageDrawable(drawable);
-            //title.setCompoundDrawablesWithIntrinsicBounds(null, drawable, null, null);
             title.setText(mainTab.getName());
 
             mTabSpec.setIndicator(indicator);
-            mTabSpec.setContent(new TabHost.TabContentFactory() {
-                @Override
-                public View createTabContent(String tag) {
-                    return new View(MainActivity.this);
-                }
-            });
+
             mTabHost.addTab(mTabSpec,mainTab.getClz(),null);
+            mTabHost.setOnTabChangedListener(this);
 
         }
     }
@@ -83,4 +79,21 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
         return getSupportFragmentManager().findFragmentByTag(mTabHost.getCurrentTabTag());
     }
 
+    @Override
+    public void onTabChanged(String tabId) {
+        Toast.makeText(this,tabId,Toast.LENGTH_SHORT).show();
+    }
+
+
+    /**
+     * 实现快速点击两次返回键退出程序
+     *
+     * 记录上一次点击的时间 --两个时间做比较
+     * 在指定范围内finish Activity
+     */
+    @Override
+    public void onBackPressed() {
+
+        super.onBackPressed();
+    }
 }

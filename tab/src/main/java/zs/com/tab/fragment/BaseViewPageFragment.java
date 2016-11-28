@@ -38,13 +38,11 @@ public abstract class BaseViewPageFragment extends Fragment {
 
             View root = inflater.inflate(R.layout.base_viewpage_fragment, null);
             //导航滑动卡
-            mTabStrip = (PagerSlidingTabStrip) root
-                    .findViewById(R.id.pager_tabstrip);
+            mTabStrip = (PagerSlidingTabStrip) root.findViewById(R.id.pager_tabstrip);
             //滑动页面
             mViewPager = (ViewPager) root.findViewById(R.id.pager);
 
-            mTabsAdapter = new ViewPageFragmentAdapter(getChildFragmentManager(),
-                    mTabStrip, mViewPager);
+            mTabsAdapter = new ViewPageFragmentAdapter(getChildFragmentManager(), mTabStrip, mViewPager);
             setScreenPageLimit();
 
             //让实现的类去填充数据

@@ -90,6 +90,9 @@ public class FragmentPageA extends BaseRefreshFragment {
         }
 
 
+        /**
+         * 利用viewHolder 避免重复查找控件
+         */
         final  class ViewHolder {
             private TextView tv_id;
             private TextView tv_content;

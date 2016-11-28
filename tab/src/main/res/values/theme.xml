@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <style name="AppBaseTheme_Light.Base" parent="@style/Theme.AppCompat.Light">
+    <style name="AppBaseTheme_Light.Base" parent="@style/Theme.AppCompat.NoActionBar">
         <item name="windows_bg">@color/day_windows_bg</item>
         <item name="sliding_block_bg">@drawable/image_sliding_block</item>
         <item name="lineColor">@color/day_line_color</item>

@@ -67,19 +67,15 @@ public class PagerSlidingTabStrip extends HorizontalScrollView implements
 
 	public PagerSlidingTabStrip(Context context, AttributeSet attrs) {
 		super(context, attrs);
-		setHorizontalScrollBarEnabled(false); // 隐藏横向滑动提示条
+		setHorizontalScrollBarEnabled(true); // 隐藏横向滑动提示条
 
 		if (attrs != null) {
-			TypedArray attrsTypedArray = context.obtainStyledAttributes(attrs,
-					R.styleable.PagerSlidingTabStrip);
+			TypedArray attrsTypedArray = context.obtainStyledAttributes(attrs, R.styleable.PagerSlidingTabStrip);
 			if (attrsTypedArray != null) {
-				allowWidthFull = attrsTypedArray.getBoolean(
-						R.styleable.PagerSlidingTabStrip_allowWidthFull, false);
-				slidingBlockDrawable = attrsTypedArray
-						.getDrawable(R.styleable.PagerSlidingTabStrip_slidingBlock);
-				disableViewPager = attrsTypedArray.getBoolean(
-						R.styleable.PagerSlidingTabStrip_disableViewPager,
-						false);
+				allowWidthFull = attrsTypedArray.getBoolean(R.styleable.PagerSlidingTabStrip_allowWidthFull, false);
+				//小绿条
+				slidingBlockDrawable = attrsTypedArray.getDrawable(R.styleable.PagerSlidingTabStrip_slidingBlock);
+				disableViewPager = attrsTypedArray.getBoolean(R.styleable.PagerSlidingTabStrip_disableViewPager, false);
 				attrsTypedArray.recycle();
 			}
 		}
@@ -134,8 +130,7 @@ public class PagerSlidingTabStrip extends HorizontalScrollView implements
 		// 先去掉所有子View的外边距
 		for (View view : views) {
 			if (view.getLayoutParams() instanceof MarginLayoutParams) {
-				LinearLayout.LayoutParams lp = (LinearLayout.LayoutParams) view
-						.getLayoutParams();
+				LinearLayout.LayoutParams lp = (LinearLayout.LayoutParams) view.getLayoutParams();
 				parentViewWidth -= lp.leftMargin + lp.rightMargin;
 			}
 		}
@@ -191,8 +186,7 @@ public class PagerSlidingTabStrip extends HorizontalScrollView implements
 		ViewGroup tabViewGroup = getTabsLayout();
 		if (tabViewGroup != null) {
 			// 初始化滑块位置以及选中状态
-			currentPosition = viewPager != null ? viewPager.getCurrentItem()
-					: 0;
+			currentPosition = viewPager != null ? viewPager.getCurrentItem() : 0;
 			if (!disableViewPager) {
 				scrollToChild(currentPosition, 0); // 移动滑块到指定位置
 				selectedTab(currentPosition); // 选中指定位置的TAB
@@ -225,27 +219,26 @@ public class PagerSlidingTabStrip extends HorizontalScrollView implements
 			return;
 		/* 绘制滑块 */
 		ViewGroup tabsLayout = getTabsLayout();
-		if (tabsLayout != null && tabsLayout.getChildCount() > 0
-				&& slidingBlockDrawable != null) {
+		if (tabsLayout != null && tabsLayout.getChildCount() > 0 && slidingBlockDrawable != null) {
 			View currentTab = tabsLayout.getChildAt(currentPosition);
 			if (currentTab != null) {
 				float slidingBlockLeft = currentTab.getLeft();
 				float slidingBlockRight = currentTab.getRight();
-				if (currentPositionOffset > 0f
-						&& currentPosition < tabsLayout.getChildCount() - 1) {
+				if (currentPositionOffset > 0f && currentPosition < tabsLayout.getChildCount() - 1) {
 					View nextTab = tabsLayout.getChildAt(currentPosition + 1);
 					if (nextTab != null) {
 						final float nextTabLeft = nextTab.getLeft();
 						final float nextTabRight = nextTab.getRight();
-						slidingBlockLeft = (currentPositionOffset * nextTabLeft + (1f - currentPositionOffset)
-								* slidingBlockLeft);
-						slidingBlockRight = (currentPositionOffset
-								* nextTabRight + (1f - currentPositionOffset)
-								* slidingBlockRight);
+						slidingBlockLeft = (currentPositionOffset * nextTabLeft + (1f - currentPositionOffset) * slidingBlockLeft);
+						slidingBlockRight = (currentPositionOffset * nextTabRight + (1f - currentPositionOffset) * slidingBlockRight);
 					}
 				}
-				slidingBlockDrawable.setBounds((int) slidingBlockLeft, 0,
-						(int) slidingBlockRight, getHeight());
+				//滑块的位置
+				slidingBlockDrawable.setBounds((int) slidingBlockLeft, 0, (int) slidingBlockRight, getHeight());
+				//slidingBlockDrawable.setHotspotBounds((int)slidingBlockLeft, 0,(int)slidingBlockRight, getHeight());
+				//slidingBlockDrawable.setHotspotBounds();
+				//slidingBlockDrawable.setBounds(100, 0, 20, getHeight());
+
 				slidingBlockDrawable.draw(canvas);
 			}
 		}
@@ -274,8 +267,7 @@ public class PagerSlidingTabStrip extends HorizontalScrollView implements
 	 */
 	private void scrollToChild(int position, int offset) {
 		ViewGroup tabsLayout = getTabsLayout();
-		if (tabsLayout != null && tabsLayout.getChildCount() > 0
-				&& position < tabsLayout.getChildCount()) {
+		if (tabsLayout != null && tabsLayout.getChildCount() > 0 && position < tabsLayout.getChildCount()) {
 			View view = tabsLayout.getChildAt(position);
 			if (view != null) {
 				// 计算新的X坐标
@@ -328,13 +320,11 @@ public class PagerSlidingTabStrip extends HorizontalScrollView implements
 	 */
 	private void selectedTab(int currentSelectedTabPosition) {
 		ViewGroup tabsLayout = getTabsLayout();
-		if (currentSelectedTabPosition > -1 && tabsLayout != null
-				&& currentSelectedTabPosition < tabsLayout.getChildCount()) {
+		if (currentSelectedTabPosition > -1 && tabsLayout != null && currentSelectedTabPosition < tabsLayout.getChildCount()) {
 			if (currentSelectedTabView != null) {
 				currentSelectedTabView.setSelected(false);
 			}
-			currentSelectedTabView = tabsLayout
-					.getChildAt(currentSelectedTabPosition);
+			currentSelectedTabView = tabsLayout.getChildAt(currentSelectedTabPosition);
 			if (currentSelectedTabView != null) {
 				currentSelectedTabView.setSelected(true);
 			}

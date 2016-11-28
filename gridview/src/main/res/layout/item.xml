@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<zs.com.gridview.layout.SquareLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <ImageView
+        android:id="@+id/iv_img"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="centerCrop"
+        android:src="@drawable/pic12"/>
+    <TextView
+        android:id="@+id/comment"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#88000000"
+        android:textColor="#FFFFFF"
+        android:layout_alignParentBottom="true"
+        android:gravity="center_horizontal"/>
+        <View
+            android:id="@+id/press_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/item_press"
+            ></View>
+</zs.com.gridview.layout.SquareLayout>
