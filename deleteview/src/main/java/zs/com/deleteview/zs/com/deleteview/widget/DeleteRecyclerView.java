@@ -113,7 +113,6 @@ public class DeleteRecyclerView extends RecyclerView {
                 if(scrollX>maxLength/2){
                     //若达到了最小滑动距离，显示删除view
                     mScroller.startScroll(scrollX, 0, maxLength-scrollX, 0);
-                    //记录
                 }else{
                     //未达到最小滑动距离，还原
                     mScroller.startScroll(scrollX, 0, -scrollX, 0);
