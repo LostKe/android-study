@@ -3,11 +3,15 @@ package zs.com.deleteview;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
+import android.view.View;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import zs.com.deleteview.zs.com.deleteview.widget.DeleteRecyclerView;
+import zs.com.deleteview.zs.com.deleteview.widget.OnRecyclerItemClickListener;
 import zs.com.deleteview.zs.com.deleteview.widget.RecyclerAdapter;
 
 /**
@@ -43,6 +47,15 @@ public class MainActivity extends AppCompatActivity {
         recyclerView = (DeleteRecyclerView) findViewById(R.id.recyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(adpter=new RecyclerAdapter(this,dataList));
+        recyclerView.addOnItemTouchListener(new OnRecyclerItemClickListener(recyclerView) {
+            @Override
+            public void onItemClick(RecyclerView.ViewHolder vh) {
+                View itemView=vh.itemView;
+                int position=  vh.getAdapterPosition();
+                Toast.makeText(MainActivity.this,"pos:"+position,Toast.LENGTH_SHORT).show();
+                adpter.removeRecycle(position);
+            }
+        });
     }
 
 

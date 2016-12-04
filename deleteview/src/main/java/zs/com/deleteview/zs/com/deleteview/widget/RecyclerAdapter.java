@@ -40,15 +40,6 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerViewHolder>{
 
     @Override
     public void onBindViewHolder(final RecyclerViewHolder holder, int position) {
-//        if(listener!=null){
-//            holder.itemView.setOnClickListener(new View.OnClickListener() {
-//                @Override
-//                public void onClick(View v) {
-//                    int pos=holder.getLayoutPosition();
-//                    listener.onItemClick(holder.itemView,pos);
-//                }
-//            });
-//        }
         holder.item_recycler_text.setText(list.get(position));
 
     }
@@ -60,7 +51,8 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerViewHolder>{
 
     public void removeRecycle(int position) {
         list.remove(position);
-        notifyDataSetChanged();
+        notifyItemRemoved(position);
+        notifyItemRangeChanged(position,list.size()-position);
         if (list.size() == 0) {
             Toast.makeText(context, "已经没数据啦", Toast.LENGTH_SHORT).show();
         }

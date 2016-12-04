@@ -53,6 +53,8 @@ public class DeleteRecyclerView extends RecyclerView {
     }
 
     private int dipToPx(Context context, int dip) {
+
+        //WindowManager windowManager= (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
         return (int) (dip * context.getResources().getDisplayMetrics().density + 0.5f);
     }
 
@@ -71,6 +73,9 @@ public class DeleteRecyclerView extends RecyclerView {
                     mTouchFrame=new Rect();
                 }
                 int count=getChildCount();//当前屏幕显示view的数量
+                if(count<=0){
+                    break;
+                }
                 for (int i = count - 1; i >= 0; i--) {
                     final View child = getChildAt(i);
                     if (child.getVisibility() == View.VISIBLE) {
@@ -82,7 +87,6 @@ public class DeleteRecyclerView extends RecyclerView {
                         }
                     }
                 }
-
 
                 //通过position得到item的viewHolder
                 View view = getChildAt(pos - mFirstPosition);
