@@ -59,6 +59,12 @@ public class FragmentList extends Fragment implements AdapterView.OnItemClickLis
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        EventBus.getDefault().post(new ItemEvent(position,items.get(position)));
+        ItemEvent event=null;
+        if(position%2 ==0){
+            event=new ItemEvent(position,"内容："+items.get(position),EventType.CONTENT);
+        }else{
+            event=new ItemEvent(position,"详细信息："+items.get(position),EventType.DETAIL);
+        }
+        EventBus.getDefault().post(event);
     }
 }

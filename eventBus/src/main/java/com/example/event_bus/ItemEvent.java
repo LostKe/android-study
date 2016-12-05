@@ -7,13 +7,16 @@ public class ItemEvent {
 
     private int id;
     private String content;
+    private EventType type;
+
 
     public ItemEvent() {
     }
 
-    public ItemEvent(int id, String content) {
+    public ItemEvent(int id, String content,EventType type) {
         this.id = id;
         this.content = content;
+        this.type=type;
     }
 
     public int getId() {
@@ -30,6 +33,14 @@ public class ItemEvent {
 
     public void setContent(String content) {
         this.content = content;
+    }
+
+    public EventType getType() {
+        return type;
+    }
+
+    public void setType(EventType type) {
+        this.type = type;
     }
 
     @Override

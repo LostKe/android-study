@@ -16,14 +16,14 @@ import org.greenrobot.eventbus.ThreadMode;
 /**
  * Created by youx on 2016-12-05.
  */
-public class FragmentDetail extends Fragment {
+public class FragmentContent extends Fragment {
 
-    private TextView fragmentDetail_tv;
+    private TextView fragment_content_tv;
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view=inflater.inflate(R.layout.fragment_detail,container);
-        fragmentDetail_tv= (TextView) view.findViewById(R.id.fragment_detail_tv);
+        View view=inflater.inflate(R.layout.fragment_content,container);
+        fragment_content_tv= (TextView) view.findViewById(R.id.fragment_content_tv);
         return view;
     }
 
@@ -45,11 +45,12 @@ public class FragmentDetail extends Fragment {
     public void onMessageEvent(ItemEvent event) {
         switch (event.getType()){
             case DETAIL:
-                fragmentDetail_tv.setText(event.getContent());
+                fragment_content_tv.setText("");
                 break;
             case CONTENT:
-                fragmentDetail_tv.setText("");
+                fragment_content_tv.setText(event.getContent());
                 break;
         }
+
     }
 }
