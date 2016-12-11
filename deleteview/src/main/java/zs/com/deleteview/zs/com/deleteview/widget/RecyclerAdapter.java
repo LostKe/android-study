@@ -52,7 +52,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerViewHolder>{
     public void removeRecycle(int position) {
         list.remove(position);
         notifyItemRemoved(position);
-        notifyItemRangeChanged(position,list.size()-position);
+
         if (list.size() == 0) {
             Toast.makeText(context, "已经没数据啦", Toast.LENGTH_SHORT).show();
         }

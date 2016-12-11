@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="AppBaseTheme_Light.Base" parent="@style/AppTheme">
+        <item name="sliding_block_bg">@drawable/image_sliding_block</item>
+        <item name="lineColor">@color/day_line_color</item>
+    </style>
+</resources>
