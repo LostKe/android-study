@@ -1,5 +1,1 @@
-<<<<<<< HEAD
-include ':app', ':musicplayer', ':listview', ':tab', ':topbar', ':gridview', ':toolbar', ':loading', ':remoteservice', ':localservice', ':lanchmode', ':slide', ':listview2scrollerview', ':tabpager', ':cycle', ':deleteview', ':viewpager'
-=======
-include ':app', ':musicplayer', ':listview', ':tab', ':topbar', ':gridview', ':toolbar', ':loading', ':remoteservice', ':localservice', ':lanchmode', ':slide', ':listview2scrollerview', ':tabpager', ':cycle', ':deleteview', ':eventBus'
->>>>>>> 47ff024c7ff58e709d5f53a9b0d8421cbec13dc4
+include ':app', ':musicplayer', ':listview', ':tab', ':topbar', ':gridview', ':toolbar', ':loading', ':remoteservice', ':localservice', ':lanchmode', ':slide', ':listview2scrollerview', ':tabpager', ':cycle', ':deleteview', ':eventBus',':viewpager'
