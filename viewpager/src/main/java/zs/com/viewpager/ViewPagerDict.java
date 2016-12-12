@@ -9,7 +9,7 @@ import java.util.ArrayList;
  */
 public enum  ViewPagerDict {
 
-    INTRO("简介","intro",FragmentList.class,getArgs("intro")),
+    INTRO("简介相关","intro",FragmentList.class,getArgs("intro")),
     FEEDBACK("评价","feedback",FragmentList.class,getArgs("feedback")),
     RELATE("相关","relate",FragmentList.class,getArgs("relate")),
     OTHER("其他","other",FragmentList.class,getArgs("other")),

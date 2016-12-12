@@ -33,6 +33,7 @@ public class TabViewPageAdapter extends FragmentStatePagerAdapter implements Vie
         super(fm);
         this.mViewPager=viewPager;
         this.pagerSlidingTabStrip=pagerSlidingTabStrip;
+        pagerSlidingTabStrip.setViewPager(mViewPager);
         mContext=mViewPager.getContext();
         mViewPager.setAdapter(this);
         mViewPager.addOnPageChangeListener(this);
