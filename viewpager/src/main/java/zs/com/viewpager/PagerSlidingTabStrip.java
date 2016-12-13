@@ -30,6 +30,8 @@ public class PagerSlidingTabStrip extends HorizontalScrollView implements View.O
 
     private OnClickTabListener mClickTabListener;
 
+    private ViewPager.OnPageChangeListener mOnPageChangeListener;
+
     private int currentPosition; // 当前位置
 
     private Drawable slidingBlockDrawable; // 滑块
@@ -48,9 +50,9 @@ public class PagerSlidingTabStrip extends HorizontalScrollView implements View.O
         super(context, attrs, defStyleAttr);
         setHorizontalScrollBarEnabled(false);//隐藏横向滑动提示条
 
-        if(attrs!=null){
-            TypedArray array=context.obtainStyledAttributes(attrs,R.styleable.PagerSlidingTabStrip);
-            slidingBlockDrawable=array.getDrawable(R.styleable.PagerSlidingTabStrip_slidingBlock);
+        if (attrs != null) {
+            TypedArray array = context.obtainStyledAttributes(attrs, R.styleable.PagerSlidingTabStrip);
+            slidingBlockDrawable = array.getDrawable(R.styleable.PagerSlidingTabStrip_slidingBlock);
         }
     }
 
@@ -84,14 +86,10 @@ public class PagerSlidingTabStrip extends HorizontalScrollView implements View.O
     /**
      * 调整views集合中的View，让所有View的宽度加起来正好等于parentViewWidth
      *
-     * @param views
-     *            子View集合
-     * @param parentViewWidth
-     *            父Vie的宽度
-     * @param parentWidthMeasureSpec
-     *            父View的宽度规则
-     * @param parentHeightMeasureSpec
-     *            父View的高度规则
+     * @param views                   子View集合
+     * @param parentViewWidth         父Vie的宽度
+     * @param parentWidthMeasureSpec  父View的宽度规则
+     * @param parentHeightMeasureSpec 父View的高度规则
      */
     private void adjustChildWidthWithParent(List<View> views,
                                             int parentViewWidth, int parentWidthMeasureSpec,
@@ -141,26 +139,24 @@ public class PagerSlidingTabStrip extends HorizontalScrollView implements View.O
                 if (layoutParams instanceof MarginLayoutParams) {
                     measureChildWithMargins(view, parentWidthMeasureSpec, 0, parentHeightMeasureSpec, 0);
                 } else {
-                    measureChild(view, parentWidthMeasureSpec,   parentHeightMeasureSpec);
+                    measureChild(view, parentWidthMeasureSpec, parentHeightMeasureSpec);
                 }
             }
         }
     }
 
 
-
     @Override
     protected void onLayout(boolean changed, int l, int t, int r, int b) {
         super.onLayout(changed, l, t, r, b);
 
-        ViewGroup tabViewGroup=getTabsLayout();
+        ViewGroup tabViewGroup = getTabsLayout();
 
 
-        if(tabViewGroup!=null){
-           currentPosition=mViewPager!=null?mViewPager.getCurrentItem():0;
+        if (tabViewGroup != null) {
+            currentPosition = mViewPager != null ? mViewPager.getCurrentItem() : 0;
             selectedTab(currentPosition);
-            scrollToChild(currentPosition,0);
-            for (int i=0;i<tabViewGroup.getChildCount();i++){
+            for (int i = 0; i < tabViewGroup.getChildCount(); i++) {
                 View item = tabViewGroup.getChildAt(i);
                 item.setTag(i);
                 item.setOnClickListener(this);
@@ -168,15 +164,16 @@ public class PagerSlidingTabStrip extends HorizontalScrollView implements View.O
         }
     }
 
-    float currentPositionOffset ;//当前位置偏移量
+    float currentPositionOffset;//当前位置偏移量 手指滑动的距离
+
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
         //绘制滑块
         ViewGroup tabsLayout = getTabsLayout();
-        if(tabsLayout!=null && tabsLayout.getChildCount()>0 && slidingBlockDrawable!=null){
+        if (tabsLayout != null && tabsLayout.getChildCount() > 0 && slidingBlockDrawable != null) {
             View currentTab = tabsLayout.getChildAt(currentPosition);
-            if(currentTab!=null){
+            if (currentTab != null) {
                 float slidingBlockLeft = currentTab.getLeft();
                 float slidingBlockRight = currentTab.getRight();
                 if (currentPositionOffset > 0f && currentPosition < tabsLayout.getChildCount() - 1) {
@@ -205,14 +202,14 @@ public class PagerSlidingTabStrip extends HorizontalScrollView implements View.O
     }
 
 
-
-
     /**
      * 滚动到指定的位置
+     *
      * @param position 指定位置
-     * @param offset 偏移量
+     * @param offset   偏移量
      */
     private void scrollToChild(int position, int offset) {
+        Log.e(">>>>>>scrollToChild",position+"---"+offset);
         ViewGroup tabsLayout = getTabsLayout();
         if (tabsLayout != null && tabsLayout.getChildCount() > 0 && position < tabsLayout.getChildCount()) {
             View view = tabsLayout.getChildAt(position);
@@ -227,6 +224,8 @@ public class PagerSlidingTabStrip extends HorizontalScrollView implements View.O
                 if (newScrollX != lastScrollX) {
                     lastScrollX = newScrollX;
                     scrollTo(newScrollX, 0);
+                    invalidate();
+
                 }
             }
         }
@@ -236,6 +235,7 @@ public class PagerSlidingTabStrip extends HorizontalScrollView implements View.O
     private int lastOffset;
     private int lastScrollX = 0;
     private boolean start;
+
     /**
      * 获取偏移量
      */
@@ -266,8 +266,8 @@ public class PagerSlidingTabStrip extends HorizontalScrollView implements View.O
         }
     }
 
-    public  void addTab(View tabView){
-        addTab(tabView,-1);
+    public void addTab(View tabView) {
+        addTab(tabView, -1);
     }
 
     /**
@@ -287,34 +287,42 @@ public class PagerSlidingTabStrip extends HorizontalScrollView implements View.O
     }
 
 
-    int nextPagePosition;
-    public void setViewPager(ViewPager pager){
-        this.mViewPager=pager;
 
+    public void setViewPager(ViewPager pager) {
+        this.mViewPager = pager;
         mViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
                 ViewGroup tabsLayout = getTabsLayout();
-                if (nextPagePosition < tabsLayout.getChildCount()) {
-                    View view = tabsLayout.getChildAt(nextPagePosition);
+                if (position < tabsLayout.getChildCount()) {
+                    View view = tabsLayout.getChildAt(position);
                     if (view != null) {
-                        currentPosition = nextPagePosition;
+                        currentPosition = position;
                         currentPositionOffset = positionOffset;
-                        scrollToChild(nextPagePosition, (int) (positionOffset * view.getWidth()));
-                        invalidate();
+                        //移动的距离为 当前坐标+手滑动的距离
+                        scrollToChild(position, (int) (positionOffset * view.getWidth()));
+                        Log.e("setViewPager",""+(int) (positionOffset * view.getWidth()));
                     }
+                }
+                if(mOnPageChangeListener!=null){
+                    mOnPageChangeListener.onPageScrolled(position,positionOffset,positionOffsetPixels);
                 }
             }
 
             @Override
             public void onPageSelected(int position) {
-                Log.e(">>>>","pageSelect:"+position);
+                Log.e(">>>>", "pageSelect:" + position);
                 selectedTab(position);
+                if(mOnPageChangeListener!=null){
+                    mOnPageChangeListener.onPageSelected(position);
+                }
             }
 
             @Override
             public void onPageScrollStateChanged(int state) {
-
+                if(mOnPageChangeListener!=null){
+                    mOnPageChangeListener.onPageScrollStateChanged(state);
+                }
             }
         });
         requestLayout();
@@ -335,22 +343,26 @@ public class PagerSlidingTabStrip extends HorizontalScrollView implements View.O
 
     @Override
     public void onClick(View v) {
-        int tag= (int) v.getTag();
-        if(mClickTabListener!=null){
-            mClickTabListener.onClickTab(v,tag);
+        int tag = (int) v.getTag();
+        if (mClickTabListener != null) {
+            mClickTabListener.onClickTab(v, tag);
         }
-        if (mViewPager!=null){
-            mViewPager.setCurrentItem(tag,true);
+        if (mViewPager != null) {
+            mViewPager.setCurrentItem(tag, true);
         }
     }
 
 
-    interface  OnClickTabListener{
-        void  onClickTab(View tab,int index);
+    interface OnClickTabListener {
+        void onClickTab(View tab, int index);
     }
 
-    public void setOnClickTabListener(OnClickTabListener l){
-        this.mClickTabListener=l;
+    public void setOnClickTabListener(OnClickTabListener l) {
+        this.mClickTabListener = l;
 
+    }
+
+    public void setmOnPageChangeListener(ViewPager.OnPageChangeListener listener){
+        this.mOnPageChangeListener=listener;
     }
 }

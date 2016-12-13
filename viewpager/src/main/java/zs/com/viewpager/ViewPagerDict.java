@@ -13,7 +13,8 @@ public enum  ViewPagerDict {
     FEEDBACK("评价","feedback",FragmentList.class,getArgs("feedback")),
     RELATE("相关","relate",FragmentList.class,getArgs("relate")),
     OTHER("其他","other",FragmentList.class,getArgs("other")),
-    AUTHOR("作者","author",FragmentList.class,getArgs("author")),;
+    AUTHOR("作者","author",FragmentList.class,getArgs("author")),
+    BOOK("书籍","book",FragmentList.class,getArgs("book")),;
 
     private String title;
     private String tag;
