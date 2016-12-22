@@ -129,6 +129,10 @@ public class DeleteRecyclerView extends RecyclerView {
     }
 
 
+    @Override
+    public boolean onInterceptTouchEvent(MotionEvent e) {
+        return super.onInterceptTouchEvent(e);
+    }
 
     @Override
     public void computeScroll() {

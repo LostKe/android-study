@@ -33,7 +33,7 @@ public abstract class OnRecyclerItemClickListener implements RecyclerView.OnItem
 
     @Override
     public void onTouchEvent(RecyclerView rv, MotionEvent e) {
-        mGestureDetector.onTouchEvent(e);
+
     }
 
     @Override
@@ -46,10 +46,11 @@ public abstract class OnRecyclerItemClickListener implements RecyclerView.OnItem
         public boolean onSingleTapUp(MotionEvent e) {
             View child = recyclerView.findChildViewUnder(e.getX(), e.getY());
             if (child!=null ) {
+                RecyclerView.ViewHolder vh = recyclerView.getChildViewHolder(child);
                 View deleteView=child.findViewById(R.id.item_delete_txt);
                 RectF rect = calcViewScreenLocation(deleteView);
                 if(rect.contains(e.getRawX(),e.getRawY())){
-                    RecyclerView.ViewHolder vh = recyclerView.getChildViewHolder(child);
+
                     onItemClick(vh);
                 }
 
@@ -57,6 +58,8 @@ public abstract class OnRecyclerItemClickListener implements RecyclerView.OnItem
             return true;
         }
     }
+
+
     public abstract void onItemClick(RecyclerView.ViewHolder vh);
 
     /**

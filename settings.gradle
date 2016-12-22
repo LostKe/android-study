@@ -1,1 +1,1 @@
-include ':app', ':musicplayer', ':listview', ':tab', ':topbar', ':gridview', ':toolbar', ':loading', ':remoteservice', ':localservice', ':lanchmode', ':slide', ':listview2scrollerview', ':tabpager', ':cycle', ':deleteview', ':eventBus'
+include ':app', ':musicplayer', ':listview', ':tab', ':topbar', ':gridview', ':toolbar', ':loading', ':remoteservice', ':localservice', ':lanchmode', ':slide', ':listview2scrollerview', ':tabpager', ':cycle', ':deleteview', ':eventBus',':viewpager'

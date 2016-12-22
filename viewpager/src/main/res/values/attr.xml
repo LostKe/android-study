@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <attr name="slidingBlock" format="color|reference"/>
+    <declare-styleable name="PagerSlidingTabStrip">
+        <attr name="slidingBlock"/>
+    </declare-styleable>
+</resources>

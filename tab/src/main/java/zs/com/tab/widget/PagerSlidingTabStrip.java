@@ -163,17 +163,14 @@ public class PagerSlidingTabStrip extends HorizontalScrollView implements
 		// 修改宽度小于新的平均宽度的View的宽度
 		for (View view : views) {
 			if (view.getMeasuredWidth() < averageWidth) {
-				LinearLayout.LayoutParams layoutParams = (LinearLayout.LayoutParams) view
-						.getLayoutParams();
+				LinearLayout.LayoutParams layoutParams = (LinearLayout.LayoutParams) view.getLayoutParams();
 				layoutParams.width = averageWidth;
 				view.setLayoutParams(layoutParams);
 				// 再次测量让新宽度生效
 				if (layoutParams instanceof MarginLayoutParams) {
-					measureChildWithMargins(view, parentWidthMeasureSpec, 0,
-							parentHeightMeasureSpec, 0);
+					measureChildWithMargins(view, parentWidthMeasureSpec, 0, parentHeightMeasureSpec, 0);
 				} else {
-					measureChild(view, parentWidthMeasureSpec,
-							parentHeightMeasureSpec);
+					measureChild(view, parentWidthMeasureSpec, parentHeightMeasureSpec);
 				}
 			}
 		}
